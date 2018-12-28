@@ -1,2 +1,2 @@
-# alternative-destinations
-Web service built with Flask
+# Alternative Destinations
+Web service built with Flask.
