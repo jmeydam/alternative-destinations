@@ -3,10 +3,12 @@ Web service built with Flask.
 
 Initial version based on *Flask Web Development*, second edition, by Miguel Grinberg (O'Reilly, 2018).
 
-## Activate virtual environment
+## Create virtual environment
 
 ```
+virtualenv -p $(which python3.6) venv
 source venv/bin/activate
+pip install -r requirements.txt
 ```
 
 ## Set environment variables
