@@ -1,10 +1,16 @@
 import os
+from dotenv import load_dotenv
+
 basedir = os.path.abspath(os.path.dirname(__file__))
+load_dotenv(os.path.join(basedir, '.env'))
 
 
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'xyz'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    CORS_HEADERS = 'Content-Type'
+    PASSWORD_USER_01 = os.environ.get('PASSWORD_USER_01')
+    PASSWORD_USER_02 = os.environ.get('PASSWORD_USER_02')
 
     @staticmethod
     def init_app(app):
