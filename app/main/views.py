@@ -1,20 +1,15 @@
 from flask import render_template, session, redirect, url_for
 from ..models import User
 from . import main
-from .forms import NameForm
+from .forms import ParameterForm
+
+test_url = '../api/v1/search?iata_code=LHR&date=2019-01-15&min_temperature_celsius=5&max_temperature_celsius=20&max_precipitation_mm=0&max_cloud_cover_percent=20'
 
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
-    form = NameForm()
+    form = ParameterForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(username=form.name.data).first()
-        if user is None:
-            session['known'] = False
-        else:
-            session['known'] = True
-        session['name'] = form.name.data
-        return redirect(url_for('.index'))
-    return render_template('index.html',
-                           form=form, name=session.get('name'),
-                           known=session.get('known', False))
+        #return redirect(url_for('.index'))
+        return redirect(test_url)
+    return render_template('index.html', form=form)
