@@ -1,10 +1,10 @@
-from flask import request
+from flask import request, make_response
 from flask_cors import cross_origin
 from . import api
 from .authentication import auth
 
 
-test_response_json = '''{"alternative_destinations":
+test_data_json = '''{"alternative_destinations":
   [
     {"iata_code": "MAD", "city": "Madrid"},
     {"iata_code": "TLV", "city": "Tel Aviv"},
@@ -23,4 +23,6 @@ def get_alternative_destinations():
     max_temperature_celsius = request.args.get('max_temperature_celsius')
     max_precipitation_mm = request.args.get('max_precipitation_mm')
     max_cloud_cover_percent = request.args.get('max_cloud_cover_percent')
-    return test_response_json
+    response = make_response(test_data_json)
+    response.mimetype = 'application/json'
+    return response
