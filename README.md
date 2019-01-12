@@ -7,6 +7,8 @@ Initial version based on *Flask Web Development*, second edition, by Miguel Grin
 
 ```
 virtualenv -p $(which python3.6) venv
+# also works on most systems:
+# python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 ```
@@ -14,8 +16,21 @@ pip install -r requirements.txt
 ## Set Environment Variables
 
 ```
-export FLASK_APP=alternative-destinations.py
+export FLASK_APP=alternative_destinations.py
 export FLASK_DEBUG=1
+```
+
+## Create .env File
+
+Example:
+
+```
+cat .env
+```
+
+```
+SECRET_KEY=a_secret_key
+PASSWORD_USER_1=password_for_user_1
 ```
 
 ## Create Dev Database
