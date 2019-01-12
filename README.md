@@ -30,7 +30,8 @@ cat .env
 
 ```
 SECRET_KEY=a_secret_key
-PASSWORD_USER_1=password_for_user_1
+PASSWORD_USER_01=password_for_user_01
+PASSWORD_USER_02=password_for_user_02
 ```
 
 ## Create Dev Database
