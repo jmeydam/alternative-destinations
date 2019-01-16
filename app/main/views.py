@@ -1,5 +1,5 @@
 from flask import render_template, session, redirect, url_for
-from ..models import User
+from ..models import Destination
 from . import main
 from .forms import ParameterForm
 

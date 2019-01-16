@@ -2,7 +2,7 @@ from flask import request, make_response
 from flask_cors import cross_origin
 from . import api
 from .authentication import auth
-
+from app.models import Destination
 
 test_data_json = '''{"alternative_destinations":
   [
@@ -23,6 +23,9 @@ def get_alternative_destinations():
     max_temperature_celsius = request.args.get('max_temperature_celsius')
     max_precipitation_mm = request.args.get('max_precipitation_mm')
     max_cloud_cover_percent = request.args.get('max_cloud_cover_percent')
+    dest_mad = Destination.query.filter_by(iata_code='MAD').first()
+    dest_tlv = Destination.query.filter_by(iata_code='TLV').first()
+    dest_iah = Destination.query.filter_by(iata_code='IAH').first()
     response = make_response(test_data_json)
     response.mimetype = 'application/json'
     return response
