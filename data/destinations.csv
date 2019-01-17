@@ -1,0 +1,108 @@
+"city","country","iata_code","lat","long"
+"Reykjavik","Iceland","RKV",64.13,-21.9406
+"Toronto","Canada","YTZ",43.6275,-79.3962
+"Montreal","Canada","YUL",45.4706,-73.7408
+"Vancouver","Canada","YVR",49.1939,-123.184
+"Tunis","Tunisia","TUN",36.851,10.2272
+"Brussels","Belgium","BRU",50.9014,4.48444
+"Frankfurt","Germany","FRA",50.03333,8.57056
+"Hamburg","Germany","HAM",53.6304,9.98823
+"Berlin","Germany","THF",52.473,13.4039
+"Duesseldorf","Germany","DUS",51.2895,6.76678
+"Munich","Germany","MUC",48.3538,11.7861
+"Helsinki","Finland","HEL",60.3172,24.9633
+"Belfast","United Kingdom","BHD",54.6181,-5.8725
+"London","United Kingdom","LHR",51.4706,-0.46194
+"Glasgow","United Kingdom","GLA",55.8719,-4.43306
+"Edinburgh","United Kingdom","EDI",55.95,-3.3725
+"Dublin","Ireland","DUB",53.4213,-6.27007
+"Aarhus","Denmark","AAR",56.3,10.619
+"Copenhagen","Denmark","RKE",55.5856,12.1314
+"Ronne","Denmark","RNN",55.0633,14.7596
+"Luxemburg","Luxembourg","LUX",49.62333,6.20444
+"Oslo","Norway","OSL",60.1939,11.1004
+"Krakow","Poland","KRK",50.0777,19.7848
+"Stockholm","Sweden","ARN",59.6519,17.9186
+"Cape Town","South Africa","CPT",-33.9648,18.6017
+"Mahe","Seychelles","SEZ",-4.67434,55.5218
+"Gran Canaria","Spain","LPA",27.9319,-15.3866
+"Casablanca","Morocco","CMN",33.3675,-7.58997
+"Amilcar Cabral","Cape Verde","SID",16.7414,-22.9494
+"Sofia","Bulgaria","SOF",42.69669,23.41144
+"Zagreb","Croatia","ZAG",45.7429,16.0688
+"Barcelona","Spain","BCN",41.2971,2.07846
+"Ibiza","Spain","IBZ",38.8729,1.37312
+"Madrid","Spain","MAD",40.47193,-3.56264
+"Sevilla","Spain","SVQ",37.418,-5.89311
+"Bordeaux","France","BOD",44.8283,-0.71556
+"Marseille","France","MRS",43.43927,5.22142
+"Nice","France","NCE",43.6584,7.21587
+"Paris","France","CDG",49.0128,2.55
+"Budapest","Hungary","BUD",47.42976,19.26109
+"Milano","Italy","MXP",45.6306,8.72811
+"Venice","Italy","VCE",45.5053,12.3519
+"Rome","Italy","FCO",41.80028,12.23889
+"Prague","Czech Republic","PRG",50.1008,14.26
+"Tel-aviv","Israel","TLV",32.0114,34.8867
+"Haifa","Israel","HFA",32.8094,35.0431
+"Malta","Malta","MLA",35.8575,14.4775
+"Vienna","Austria","VIE",48.1103,16.5697
+"Porto Santo","Portugal","PXO",33.0734,-16.35
+"Lisbon","Portugal","LIS",38.7813,-9.13592
+"Sarajevo","Bosnia and Herzegovina","SJJ",43.8246,18.3315
+"Bucharest","Romania","OTP",44.57111,26.085
+"Geneva","Switzerland","GVA",46.2381,6.10895
+"Zurich","Switzerland","ZRH",47.4647,8.54917
+"Ankara","Turkey","ESB",40.1281,32.9951
+"Istanbul","Turkey","IST",40.9769,28.8146
+"Belgrade","Serbia","BEG",44.8184,20.3091
+"Bratislava","Slovakia","BTS",48.1702,17.2127
+"North Caicos","Turks and Caicos Islands","NCA",21.9175,-71.9396
+"Santo Domingo","Dominican Republic","SDQ",18.4297,-69.6689
+"Mexico City","Mexico","MEX",19.4363,-99.0721
+"Cancun","Mexico","CUN",21.0365,-86.8771
+"Panama City","Panama","PTY",9.07136,-79.3835
+"San Jose","Costa Rica","SJO",9.99386,-84.2088
+"Havana","Cuba","HAV",22.9892,-82.4091
+"Cayman Brac","Cayman Islands","CYB",19.687,-79.8828
+"Nassau","Bahamas","NAS",25.039,-77.4662
+"Wellington","New Zealand","WLG",-41.3272,174.80499
+"Abu Dhabi","United Arab Emirates","AUH",24.433,54.6511
+"Taipei","Taiwan","TPE",25.0777,121.233
+"Tokyo","Japan","NRT",35.7647,140.386
+"Sapporo","Japan","CTS",42.7752,141.692
+"Osaka","Japan","ITM",34.7855,135.438
+"Curitiba","Brazil","CWB",-25.5285,-49.1758
+"Florianopolis","Brazil","FLN",-27.67028,-48.5525
+"Rio De Janeiro","Brazil","GIG",-22.81,-43.25056
+"Sao Paulo","Brazil","GRU",-23.43556,-46.47306
+"Santiago","Chile","SCL",-33.393,-70.7858
+"Bridgetown","Barbados","BGI",13.0746,-59.4925
+"San Juan","Puerto Rico","SJU",18.4394,-66.0018
+"St. Petersburg","Russia","LED",59.8003,30.2625
+"Moscow","Russia","SVO",55.9726,37.4146
+"Hong Kong","Hong Kong","HKG",22.3089,113.915
+"Male","Maldives","MLE",4.19183,73.5291
+"Bangkok","Thailand","DMK",13.9126,100.607
+"Singapore","Singapore","SIN",1.35019,103.994
+"Melbourne","Australia","MEL",-37.6733,144.843
+"Canberra","Australia","CBR",-35.3069,149.19501
+"Sydney","Australia","SYD",-33.9461,151.177
+"Beijing","China","PEK",40.0801,116.585
+"Ulan Bator","Mongolia","ULN",47.8431,106.767
+"Shanghai","China","PVG",31.1434,121.805
+"Boston","United States","BOS",42.3643,-71.0052
+"Phoenix","United States","PHX",33.4343,-112.012
+"San Francisco","United States","SFO",37.619,-122.375
+"Los Angeles","United States","LAX",33.9425,-118.408
+"Salt Lake City","United States","SLC",40.7884,-111.978
+"Houston","United States","IAH",29.9844,-95.3414
+"Miami","United States","MIA",25.7932,-80.2906
+"Seattle","United States","SEA",47.449,-122.309
+"Portland","United States","PDX",45.5887,-122.598
+"Chicago","United States","MDW",41.786,-87.7524
+"New York","United States","JFK",40.6398,-73.7789
+"Seoul","South Korea","ICN",37.4691,126.451
+"Buenos Aires","Argentina","EZE",-34.8222,-58.5358
+"Athens","Greece","HEW",37.8933,23.7261
+"Palma de Mallorca","Spain","PMI",39.5517,2.73881
