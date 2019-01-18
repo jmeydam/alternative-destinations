@@ -1,7 +1,7 @@
 import unittest
 from flask import current_app
 from app import create_app, db
-from app.models import Destination
+from app.models import Airport, Destination
 from app.api.alternative_destinations import test_data_json
 
 test_data_json_comparison_string = '''{"alternative_destinations":
@@ -20,6 +20,7 @@ class BasicTestCase(unittest.TestCase):
         self.app_context = self.app.app_context()
         self.app_context.push()
         db.create_all()
+        Airport.insert_test_airports()
         Destination.insert_test_destinations()
 
     def tearDown(self):
@@ -33,14 +34,24 @@ class BasicTestCase(unittest.TestCase):
     def test_app_is_testing(self):
         self.assertTrue(current_app.config['TESTING'])
 
-    def test_select_all_test_destinations(self):
+    def test_select_all_airports(self):
+        test_airports =  Airport.query.all()
+        #print(test_airports)
+        self.assertTrue(len(test_airports) == 3)
+
+    def test_select_all_destinations(self):
         test_destinations =  Destination.query.all()
-        # print(test_destinations)
+        #print(test_destinations)
         self.assertTrue(len(test_destinations) == 3)
 
-    def test_select_particular_test_destination(self):
+    def test_select_particular_airport(self):
+        test_airport =  Airport.query.filter_by(iata_code='MAD').first()
+        #print(test_airport)
+        self.assertTrue(test_airport.iata_code == 'MAD')
+
+    def test_select_particular_destination(self):
         test_destination =  Destination.query.filter_by(iata_code='MAD').first()
-        # print(test_destination)
+        #print(test_destination)
         self.assertTrue(test_destination.iata_code == 'MAD')
 
     def test_test_data_json(self):
