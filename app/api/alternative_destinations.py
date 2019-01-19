@@ -8,6 +8,9 @@ from app.models import Destination
 @auth.login_required
 @cross_origin()
 def get_alternative_destinations():
+    #print(request.args)
+    #ImmutableMultiDict([('iata_code', 'LHR'), ('date', '2019-01-15'), ('min_temperature_celsius', '5'), ('max_temperature_celsius', '20'), ('max_precipitation_mm', '0'), ('max_cloud_cover_percent', '20')])
+    #ImmutableMultiDict([('iata_code', 'TLV'), ('date', '2019-01-19'), ('min_temperature_celsius', '5'), ('max_temperature_celsius', '20'), ('max_precipitation_mm', '0'), ('max_cloud_cover_percent', 'None')])
     iata_code = request.args.get('iata_code')
     date = request.args.get('date')
     min_temperature_celsius = request.args.get('min_temperature_celsius')
@@ -34,9 +37,17 @@ def get_alternative_destinations():
         dest_2 = Destination.query.filter_by(iata_code='TLV').first()
         dest_3 = Destination.query.filter_by(iata_code='IAH').first()
     else:
-        dest_1 = '?'
-        dest_2 = '?'
-        dest_3 = '?'
+        dest_1 = Destination.query.filter_by(iata_code=iata_code).first()
+        # currently error if no record with matching IATA code in database:
+        #AttributeError: 'NoneType' object has no attribute 'iata_code'
+        dest_2 = dest_1
+        dest_3 = dest_1
+
+    #print('Number of destinations in database:')
+    #print(len(Destination.query.all()))
+    #print(dir(Destination.query))
+    #print('First destination record in database:')
+    #print(Destination.query.first())
 
     line_1 = '{"alternative_destinations":\n'
     line_2 = '  [\n'
