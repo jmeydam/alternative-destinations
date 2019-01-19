@@ -7,6 +7,8 @@ auth = HTTPBasicAuth()
 
 @auth.verify_password
 def verfiy_password(username, password):
+    #print("verify_password('" + username + "', '" + password + "')")
+    #print("if 'user_01' password must match '" + current_app.config['PASSWORD_USER_01'] + "'")
     if username == '' or password == '':
         return False
     elif username == 'user_01' and password == current_app.config['PASSWORD_USER_01']:
