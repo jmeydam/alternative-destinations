@@ -48,7 +48,8 @@ class RequestTestCase(unittest.TestCase):
         with self.app.test_client() as tcl:
             query = '/api/v1/search?iata_code=LHR&date=2019-01-15&min_temperature_celsius=5&max_temperature_celsius=20&max_precipitation_mm=0&max_cloud_cover_percent=20'
             response = tcl.get(query, headers=headers)
-            #print(response.get_data())
             test_data_json = response.get_data()
+            #print(test_data_json)
+            #print(test_data_comparison_string)
             self.assertTrue(response.status_code == 200) # OK
             self.assertTrue(test_data_json == test_data_comparison_string)

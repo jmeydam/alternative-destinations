@@ -19,9 +19,9 @@ def get_alternative_destinations():
     iah = Destination.query.filter_by(iata_code='IAH').first()
     line_1 = '{"alternative_destinations":\n'
     line_2 = '  [\n'
-    line_3 = '    {"iata_code": "MAD", "city": "Madrid"},\n'
-    line_4 = '    {"iata_code": "TLV", "city": "Tel Aviv"},\n'
-    line_5 = '    {"iata_code": "IAH", "city": "Houston"}\n'
+    line_3 = '    {"iata_code": "%s", "city": "%s"},\n' % (mad.iata_code, mad.city)
+    line_4 = '    {"iata_code": "%s", "city": "%s"},\n' % (tlv.iata_code, tlv.city)
+    line_5 = '    {"iata_code": "%s", "city": "%s"}\n' % (iah.iata_code, iah.city)
     line_6 = '  ]\n'
     line_7 = '}\n'
     response_string = line_1 + line_2 + line_3 + line_4 + line_5 + line_6 + line_7
