@@ -14,7 +14,7 @@ Accurate weather data can be obtained from [World Weather Online](https://www.wo
 
 This GitHub repository does not contain data as obtained from World Weather Online, but data with random modifications. The data provided here is only intended for demos of the "Alternative Destinations" web service and is not fit for any practical purpose.  
 
-Weather data for airports can also be obtained from the [Iowa Environmental Mesonet website](https://mesonet.agron.iastate.edu/request/download.phtml?network=IN__ASOS) of Iowa State University.
+Weather data for airports can also be obtained from the [Iowa Environmental Mesonet website](https://mesonet.agron.iastate.edu/request/download.phtml?network=IN__ASOS).
 
 Further information: data/README.txt
 
