@@ -32,7 +32,7 @@ Weather Data
 
 Fields:
 
-- iata_code # International Air Transport Association (IATA) code of the main airport of the city
+- iata_code # International Air Transport Association (IATA) code of the airport
 - month     # English name of month
 - min_temperature_celsius # average minimum temperature over the last twelve years in degrees Celsius
 - max_temperature_celsius # average (or absolute?) maximum temperature over the last twelve years in degrees Celsius
