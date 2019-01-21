@@ -1,6 +1,6 @@
 from flask import current_app
 from app import create_app, db
-from app.models import Airport, Destination
+from app.models import Airport, Destination, WeatherCondition
 
 app = create_app('development')
 app_context = app.app_context()
@@ -35,6 +35,22 @@ with open('data/destinations.csv', encoding='utf-8') as file:
             lat=float(fields[3]),
             long=float(fields[4]))
         db.session.add(d)
+
+db.session.commit()
+
+with open('data/weather_conditions.csv', encoding='utf-8') as file:
+    for line in file:
+        # "iata_code","month","min_temperature_celsius","max_temperature_celsius","daily_precipitation_mm"
+        # "MAD","January","2.0","12.9","1.6"
+        line = line.replace('"', '')
+        fields = line.split(',')
+        w = WeatherCondition(
+            iata_code=fields[0],
+            month=fields[1],
+            min_temperature_celsius=fields[2],
+            max_temperature_celsius=fields[3],
+            daily_precipitation_mm=fields[4])
+        db.session.add(w)
 
 db.session.commit()
 

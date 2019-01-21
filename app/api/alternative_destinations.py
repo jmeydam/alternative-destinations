@@ -2,15 +2,21 @@ from flask import request, make_response
 from flask_cors import cross_origin
 from . import api
 from .authentication import auth
-from app.models import Destination
+from app.models import Airport, Destination, WeatherCondition
 
 @api.route('/search')
 @auth.login_required
 @cross_origin()
 def get_alternative_destinations():
-    #print(request.args)
-    #ImmutableMultiDict([('iata_code', 'LHR'), ('date', '2019-01-15'), ('min_temperature_celsius', '5'), ('max_temperature_celsius', '20'), ('max_precipitation_mm', '0'), ('max_cloud_cover_percent', '20')])
-    #ImmutableMultiDict([('iata_code', 'TLV'), ('date', '2019-01-19'), ('min_temperature_celsius', '5'), ('max_temperature_celsius', '20'), ('max_precipitation_mm', '0'), ('max_cloud_cover_percent', 'None')])
+
+    # print(request.args)
+    # ImmutableMultiDict([('iata_code', 'LHR'), 
+    #                     ('date', '2019-01-15'), 
+    #                     ('min_temperature_celsius', '5'), 
+    #                     ('max_temperature_celsius', '20'), 
+    #                     ('max_precipitation_mm', '0'), 
+    #                     ('max_cloud_cover_percent', '20')])
+
     iata_code = request.args.get('iata_code')
     date = request.args.get('date')
     min_temperature_celsius = request.args.get('min_temperature_celsius')
@@ -18,30 +24,21 @@ def get_alternative_destinations():
     max_precipitation_mm = request.args.get('max_precipitation_mm')
     max_cloud_cover_percent = request.args.get('max_cloud_cover_percent')
 
-    # test query:
-    # /api/v1/search?iata_code=LHR
-    #               &date=2019-01-15
-    #               &min_temperature_celsius=5
-    #               &max_temperature_celsius=20
-    #               &max_precipitation_mm=0
-    #               &max_cloud_cover_percent=20
-
-    if (iata_code== 'LHR' and 
-        date == '2019-01-15' and 
-        min_temperature_celsius == '5' and 
-        max_temperature_celsius == '20' and
-        max_precipitation_mm == '0' and
-        max_cloud_cover_percent == '20'):
-        # return test locations
-        dest_1 = Destination.query.filter_by(iata_code='MAD').first()
-        dest_2 = Destination.query.filter_by(iata_code='TLV').first()
-        dest_3 = Destination.query.filter_by(iata_code='IAH').first()
+    # get three default destinations different from destination of query
+    # options: Paris, London, Rome, New York
+    default_options = ['CDG', 'LHR', 'FCO', 'JFK'] 
+    if iata_code in default_options:
+        default_options.remove(iata_code)
     else:
-        dest_1 = Destination.query.filter_by(iata_code=iata_code).first()
-        # currently error if no record with matching IATA code in database:
-        #AttributeError: 'NoneType' object has no attribute 'iata_code'
-        dest_2 = dest_1
-        dest_3 = dest_1
+        default_options.remove('JFK')
+
+    dest_1 = Destination.query.filter_by(iata_code=default_options[0]).first()
+    dest_2 = Destination.query.filter_by(iata_code=default_options[1]).first()
+    dest_3 = Destination.query.filter_by(iata_code=default_options[2]).first()
+
+    query_airport = Airport.query.filter_by(iata_code=iata_code).first()
+    if query_airport is not None:
+       pass
 
     #print('Number of destinations in database:')
     #print(len(Destination.query.all()))
