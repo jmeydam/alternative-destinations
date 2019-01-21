@@ -51,6 +51,8 @@ def get_alternative_destinations():
     max_temperature_celsius = float(request.args.get('max_temperature_celsius'))
     max_precipitation_mm = float(request.args.get('max_precipitation_mm'))
 
+    #print(Airport.query.filter_by(iata_code=iata_code).first())
+
     defaults = default_destinations(iata_code)
 
     dests = []
@@ -87,7 +89,8 @@ def get_alternative_destinations():
     # <class 'list'>
 
     # append unordered result of fuzzy search to ordered result of strict search
-    # only append elements that are not part of the result of the strict search 
+    # only append elements that are not part of the strict search result
+
     result = result_strict + list(set(result_fuzzy) - set(result_strict))
     # print('Found ' + str(len(result)) + ' destinations. (Results strict search first.)')
     # print(result)
