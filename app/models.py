@@ -101,7 +101,7 @@ class Destination(db.Model):
         db.session.commit()
 
 
-class WeatherCondition(db.Model):
+class Weather(db.Model):
     # "iata_code","month","min_temperature_celsius","max_temperature_celsius","daily_precipitation_mm"
     __tablename__ = 'weather_conditions'
     id        = db.Column(db.Integer, primary_key=True)
@@ -112,27 +112,27 @@ class WeatherCondition(db.Model):
     daily_precipitation_mm  = db.Column(db.Float, unique=False, nullable=False, index=False)
                            
     def __repr__(self):
-        return '<WeatherCondition %r>' % (self.iata_code + ' ' + self.month)
+        return '<Weather %r>' % (self.iata_code + ' ' + self.month)
 
     @staticmethod
     def insert_test_weather_conditions():
         pass
         # "MAD","January","2.0","12.9","1.6"
-        w_01 = WeatherCondition(
+        w_01 = Weather(
             iata_code='MAD',
             month='January',
             min_temperature_celsius=2.0,
             max_temperature_celsius=12.9,
             daily_precipitation_mm=1.6)
         # "TLV","January","12.8","22.0","3.3"
-        w_02 = WeatherCondition(
+        w_02 = Weather(
             iata_code='TLV',
             month='January',
             min_temperature_celsius=12.8,
             max_temperature_celsius=22.0,
             daily_precipitation_mm=3.3)
         # "IAH","January","8.2","19.6","2.4"
-        w_03 = WeatherCondition(
+        w_03 = Weather(
             iata_code='IAH',
             month='January',
             min_temperature_celsius=8.2,

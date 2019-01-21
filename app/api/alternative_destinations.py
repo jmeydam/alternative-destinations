@@ -2,7 +2,7 @@ from flask import request, make_response
 from flask_cors import cross_origin
 from . import api
 from .authentication import auth
-from app.models import Airport, Destination, WeatherCondition
+from app.models import Airport, Destination, Weather
 
 @api.route('/search')
 @auth.login_required
