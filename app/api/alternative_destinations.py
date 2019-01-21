@@ -14,15 +14,13 @@ def get_alternative_destinations():
     #                     ('date', '2019-01-15'), 
     #                     ('min_temperature_celsius', '5'), 
     #                     ('max_temperature_celsius', '20'), 
-    #                     ('max_precipitation_mm', '0'), 
-    #                     ('max_cloud_cover_percent', '20')])
+    #                     ('max_precipitation_mm', '0')])
 
     iata_code = request.args.get('iata_code')
     date = request.args.get('date')
     min_temperature_celsius = request.args.get('min_temperature_celsius')
     max_temperature_celsius = request.args.get('max_temperature_celsius')
     max_precipitation_mm = request.args.get('max_precipitation_mm')
-    max_cloud_cover_percent = request.args.get('max_cloud_cover_percent')
 
     # get three default destinations different from destination of query
     # options: Paris, London, Rome, New York

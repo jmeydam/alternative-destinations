@@ -26,8 +26,4 @@ class ParameterForm(FlaskForm):
         'Maximum Precipitation (Millimeters per Hour)', 
         default=0,
         validators=[InputRequired(), NumberRange(min=0, max=50)])
-    max_cloud_cover_percent = IntegerField(
-        'Maximum Cloud Cover (Percent)', 
-        default=20,
-        validators=[Optional(), NumberRange(min=0, max=100)])
     submit = SubmitField('Submit')

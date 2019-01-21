@@ -57,7 +57,6 @@ print(avgs)
 # - min_temperature_celsius=5
 # - max_temperature_celsius=20
 # - max_precipitation_mm=0
-# - max_cloud_cover_percent=20 # deprecate
 
 month = avgs['name']
 avg_min_temperature_celsius = avgs['avgMinTemp']
