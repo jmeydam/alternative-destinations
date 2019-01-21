@@ -22,6 +22,17 @@ MONTH_NAMES = {
     12: 'December'}
 
 
+# get three default destinations different from original destination of query
+def default_destinations(iata_code_original_destination):
+    # Paris, London, Rome, New York
+    defaults = ['CDG', 'LHR', 'FCO', 'JFK'] 
+    if iata_code_original_destination in defaults:
+        defaults.remove(iata_code_original_destination)
+    else:
+        defaults.remove('JFK')
+    return defaults
+
+
 @api.route('/search')
 @auth.login_required
 @cross_origin()
@@ -40,37 +51,58 @@ def get_alternative_destinations():
     max_temperature_celsius = float(request.args.get('max_temperature_celsius'))
     max_precipitation_mm = float(request.args.get('max_precipitation_mm'))
 
-    # get three default destinations different from destination of query
-    # options: Paris, London, Rome, New York
-    default_options = ['CDG', 'LHR', 'FCO', 'JFK'] 
-    if iata_code in default_options:
-        default_options.remove(iata_code)
-    else:
-        default_options.remove('JFK')
+    defaults = default_destinations(iata_code)
 
-    dest = []
-    dest.append(Destination.query.filter_by(iata_code=default_options[0]).first())
-    dest.append(Destination.query.filter_by(iata_code=default_options[1]).first())
-    dest.append(Destination.query.filter_by(iata_code=default_options[2]).first())
+    dests = []
+    dests.append(Destination.query.filter_by(iata_code=defaults[0]).first())
+    dests.append(Destination.query.filter_by(iata_code=defaults[1]).first())
+    dests.append(Destination.query.filter_by(iata_code=defaults[2]).first())
 
-    #query_airport = Airport.query.filter_by(iata_code=iata_code).first()
-    #if query_airport is not None:
-
-    query_weather =  Weather.query.filter(
+    query_weather_strict =  Weather.query.filter(
         Weather.month == MONTH_NAMES[date.month],
+        Weather.iata_code != iata_code,
         Weather.min_temperature_celsius >= min_temperature_celsius,
-        Weather.max_temperature_celsius <= max_temperature_celsius).order_by(
+        Weather.max_temperature_celsius <= max_temperature_celsius,
+        Weather.daily_precipitation_mm  <= max_precipitation_mm).order_by(
             desc(Weather.min_temperature_celsius))
-    for index, weather in enumerate(query_weather):
+    # print(query_weather_strict)
+
+    result_strict = query_weather_strict.all()
+    # print('Strict search found ' + str(len(result_strict)) + ' destinations.')
+    # print(result_strict)
+
+    query_weather_fuzzy =  Weather.query.filter(
+        Weather.month == MONTH_NAMES[date.month],
+        Weather.iata_code != iata_code,
+        Weather.min_temperature_celsius >= min_temperature_celsius - 5,
+        Weather.max_temperature_celsius <= max_temperature_celsius + 5,
+        Weather.daily_precipitation_mm  <= max_precipitation_mm + 5).order_by(
+            desc(Weather.min_temperature_celsius))
+
+    result_fuzzy = query_weather_fuzzy.all()
+    # print('Fuzzy search found ' + str(len(result_fuzzy)) + ' destinations.')
+    # print(result_fuzzy)
+
+    # print(type(result_fuzzy))
+    # <class 'list'>
+
+    # append unordered result of fuzzy search to ordered result of strict search
+    # only append elements that are not part of the result of the strict search 
+    result = result_strict + list(set(result_fuzzy) - set(result_strict))
+    # print('Found ' + str(len(result)) + ' destinations. (Results strict search first.)')
+    # print(result)
+
+    # overwrite default destinations with search result
+    for index, weather in enumerate(result):
         if index > 2:
             break
-        dest[index] = Destination.query.filter_by(iata_code=weather.iata_code).first()
+        dests[index] = Destination.query.filter_by(iata_code=weather.iata_code).first()
 
     line_1 = '{"alternative_destinations":\n'
     line_2 = '  [\n'
-    line_3 = '    {"iata_code": "%s", "city": "%s"},\n' % (dest[0].iata_code, dest[0].city)
-    line_4 = '    {"iata_code": "%s", "city": "%s"},\n' % (dest[1].iata_code, dest[1].city)
-    line_5 = '    {"iata_code": "%s", "city": "%s"}\n'  % (dest[2].iata_code, dest[2].city)
+    line_3 = '    {"iata_code": "%s", "city": "%s"},\n' % (dests[0].iata_code, dests[0].city)
+    line_4 = '    {"iata_code": "%s", "city": "%s"},\n' % (dests[1].iata_code, dests[1].city)
+    line_5 = '    {"iata_code": "%s", "city": "%s"}\n'  % (dests[2].iata_code, dests[2].city)
     line_6 = '  ]\n'
     line_7 = '}\n'
 
