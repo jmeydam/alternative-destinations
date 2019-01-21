@@ -75,6 +75,7 @@ class ModelTestCase(unittest.TestCase):
         #print(query)
         #for record in query:
         #    print(record)
+        #    print(record.iata_code)
         records = query.all()
         self.assertTrue(records[0].iata_code == 'TLV') 
         self.assertTrue(records[1].iata_code == 'IAH') 

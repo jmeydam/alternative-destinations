@@ -1,8 +1,26 @@
+from datetime import datetime
+from sqlalchemy import desc
 from flask import request, make_response
 from flask_cors import cross_origin
 from . import api
 from .authentication import auth
 from app.models import Airport, Destination, Weather
+
+
+MONTH_NAMES = {
+    1: 'January',
+    2: 'February',
+    3: 'March',
+    4: 'April',
+    5: 'May',
+    6: 'June',
+    7: 'July',
+    8: 'August',
+    9: 'September',
+    10: 'October',
+    11: 'November',
+    12: 'December'}
+
 
 @api.route('/search')
 @auth.login_required
@@ -17,10 +35,10 @@ def get_alternative_destinations():
     #                     ('max_precipitation_mm', '0')])
 
     iata_code = request.args.get('iata_code')
-    date = request.args.get('date')
-    min_temperature_celsius = request.args.get('min_temperature_celsius')
-    max_temperature_celsius = request.args.get('max_temperature_celsius')
-    max_precipitation_mm = request.args.get('max_precipitation_mm')
+    date = datetime.strptime(request.args.get('date'), '%Y-%m-%d')
+    min_temperature_celsius = float(request.args.get('min_temperature_celsius'))
+    max_temperature_celsius = float(request.args.get('max_temperature_celsius'))
+    max_precipitation_mm = float(request.args.get('max_precipitation_mm'))
 
     # get three default destinations different from destination of query
     # options: Paris, London, Rome, New York
@@ -30,25 +48,29 @@ def get_alternative_destinations():
     else:
         default_options.remove('JFK')
 
-    dest_1 = Destination.query.filter_by(iata_code=default_options[0]).first()
-    dest_2 = Destination.query.filter_by(iata_code=default_options[1]).first()
-    dest_3 = Destination.query.filter_by(iata_code=default_options[2]).first()
+    dest = []
+    dest.append(Destination.query.filter_by(iata_code=default_options[0]).first())
+    dest.append(Destination.query.filter_by(iata_code=default_options[1]).first())
+    dest.append(Destination.query.filter_by(iata_code=default_options[2]).first())
 
-    query_airport = Airport.query.filter_by(iata_code=iata_code).first()
-    if query_airport is not None:
-       pass
+    #query_airport = Airport.query.filter_by(iata_code=iata_code).first()
+    #if query_airport is not None:
 
-    #print('Number of destinations in database:')
-    #print(len(Destination.query.all()))
-    #print(dir(Destination.query))
-    #print('First destination record in database:')
-    #print(Destination.query.first())
+    query_weather =  Weather.query.filter(
+        Weather.month == MONTH_NAMES[date.month],
+        Weather.min_temperature_celsius >= min_temperature_celsius,
+        Weather.max_temperature_celsius <= max_temperature_celsius).order_by(
+            desc(Weather.min_temperature_celsius))
+    for index, weather in enumerate(query_weather):
+        if index > 2:
+            break
+        dest[index] = Destination.query.filter_by(iata_code=weather.iata_code).first()
 
     line_1 = '{"alternative_destinations":\n'
     line_2 = '  [\n'
-    line_3 = '    {"iata_code": "%s", "city": "%s"},\n' % (dest_1.iata_code, dest_1.city)
-    line_4 = '    {"iata_code": "%s", "city": "%s"},\n' % (dest_2.iata_code, dest_2.city)
-    line_5 = '    {"iata_code": "%s", "city": "%s"}\n'  % (dest_3.iata_code, dest_3.city)
+    line_3 = '    {"iata_code": "%s", "city": "%s"},\n' % (dest[0].iata_code, dest[0].city)
+    line_4 = '    {"iata_code": "%s", "city": "%s"},\n' % (dest[1].iata_code, dest[1].city)
+    line_5 = '    {"iata_code": "%s", "city": "%s"}\n'  % (dest[2].iata_code, dest[2].city)
     line_6 = '  ]\n'
     line_7 = '}\n'
 
