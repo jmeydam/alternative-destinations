@@ -30,8 +30,9 @@ class TestingConfig(Config):
 
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = os.environ.get('PROD_DATABASE_URL') or \
-        'sqlite:///' + os.path.join(basedir, 'data-prod.sqlite')
+    # for now use development database (application only performs queries)
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
+        'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite')
 
 
 config = {
