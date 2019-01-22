@@ -72,7 +72,7 @@ class RequestTestCase(unittest.TestCase):
             query = '/api/v1/search?iata_code=LHR&date=2019-01-15&min_temperature_celsius=5&max_temperature_celsius=20'
             response = tcl.get(query, headers=headers)
             test_data_json = response.get_data()
-            self.assertTrue(response.status_code == 400) # OK
+            self.assertTrue(response.status_code == 400) # BAD REQUEST
             self.assertTrue(test_data_json == bad_request_json)
 
     def test_request_invalid_iata_code(self):
