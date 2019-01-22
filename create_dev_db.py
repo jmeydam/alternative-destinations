@@ -1,6 +1,6 @@
 from flask import current_app
 from app import create_app, db
-from app.models import Airport, Destination, WeatherCondition
+from app.models import Airport, Destination, Weather
 
 app = create_app('development')
 app_context = app.app_context()
@@ -44,7 +44,7 @@ with open('data/weather_conditions.csv', encoding='utf-8') as file:
         # "MAD","January","2.0","12.9","1.6"
         line = line.replace('"', '')
         fields = line.split(',')
-        w = WeatherCondition(
+        w = Weather(
             iata_code=fields[0],
             month=fields[1],
             min_temperature_celsius=fields[2],
