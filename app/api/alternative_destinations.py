@@ -44,7 +44,7 @@ def get_alternative_destinations():
     #                     ('date', '2019-01-15'), 
     #                     ('min_temperature_celsius', '5'), 
     #                     ('max_temperature_celsius', '20'), 
-    #                     ('max_precipitation_mm', '0')])
+    #                     ('max_precipitation_mm', '0')]) # max *average* daily rainfall
 
     try:
         iata_code = request.args.get('iata_code')
@@ -61,7 +61,8 @@ def get_alternative_destinations():
         assert min_temperature_celsius <= max_temperature_celsius
         max_precipitation_mm = float(request.args.get('max_precipitation_mm'))
         assert max_precipitation_mm >= 0
-        assert max_precipitation_mm <= 50
+        # avg. daily rainfall normally between 1 and 4
+        assert max_precipitation_mm <= 10 
     except Exception as e:
         #print(e)
         raise ValidationError('Invalid input')
@@ -91,7 +92,7 @@ def get_alternative_destinations():
         Weather.iata_code != iata_code,
         Weather.min_temperature_celsius >= min_temperature_celsius - 5,
         Weather.max_temperature_celsius <= max_temperature_celsius + 5,
-        Weather.daily_precipitation_mm  <= max_precipitation_mm + 5).order_by(
+        Weather.daily_precipitation_mm  <= max_precipitation_mm + 3).order_by(
             desc(Weather.min_temperature_celsius))
 
     result_fuzzy = query_weather_fuzzy.all()

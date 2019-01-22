@@ -23,7 +23,7 @@ class ParameterForm(FlaskForm):
         default=20,
         validators=[InputRequired(), NumberRange(min=-50, max=50)])
     max_precipitation_mm = IntegerField(
-        'Maximum Precipitation (Millimeters per Hour)', 
-        default=0,
-        validators=[InputRequired(), NumberRange(min=0, max=50)])
+        'Maximum Average Precipitation (Millimeters per Day)', 
+        default=2,
+        validators=[InputRequired(), NumberRange(min=0, max=10)])
     submit = SubmitField('Submit')
