@@ -4,6 +4,7 @@ from flask import request, make_response
 from flask_cors import cross_origin
 from . import api
 from .authentication import auth
+from app.exceptions import ValidationError
 from app.models import Airport, Destination, Weather
 
 
@@ -45,13 +46,25 @@ def get_alternative_destinations():
     #                     ('max_temperature_celsius', '20'), 
     #                     ('max_precipitation_mm', '0')])
 
-    iata_code = request.args.get('iata_code')
-    date = datetime.strptime(request.args.get('date'), '%Y-%m-%d')
-    min_temperature_celsius = float(request.args.get('min_temperature_celsius'))
-    max_temperature_celsius = float(request.args.get('max_temperature_celsius'))
-    max_precipitation_mm = float(request.args.get('max_precipitation_mm'))
-
-    #print(Airport.query.filter_by(iata_code=iata_code).first())
+    try:
+        iata_code = request.args.get('iata_code')
+        assert iata_code is not None
+        assert len(iata_code) == 3
+        assert iata_code == iata_code.upper()
+        date = datetime.strptime(request.args.get('date'), '%Y-%m-%d')
+        min_temperature_celsius = float(request.args.get('min_temperature_celsius'))
+        assert min_temperature_celsius >= -50
+        assert min_temperature_celsius <= 50
+        max_temperature_celsius = float(request.args.get('max_temperature_celsius'))
+        assert max_temperature_celsius >= -50
+        assert max_temperature_celsius <= 50
+        assert min_temperature_celsius <= max_temperature_celsius
+        max_precipitation_mm = float(request.args.get('max_precipitation_mm'))
+        assert max_precipitation_mm >= 0
+        assert max_precipitation_mm <= 50
+    except Exception as e:
+        #print(e)
+        raise ValidationError('Invalid input')
 
     defaults = default_destinations(iata_code)
 
