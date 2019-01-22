@@ -69,11 +69,11 @@ flask run
 
 ## Test Page
 
-[http://127.0.0.1:5000]{http://127.0.0.1:5000}
+[http://127.0.0.1:5000](http://127.0.0.1:5000)
 
 ## API Call
 
-curl "http://user:password@127.0.0.1:5000/api/v1/search?iata_code=LHR&date=2019-01-31&min_temperature_celsius=5&max_temperature_celsius=20&max_precipitation_mm=0"
+curl "http://user:password@127.0.0.1:5000/api/v1/search?iata_code=LHR&date=2019-01-31&min_temperature_celsius=5&max_temperature_celsius=20&max_precipitation_mm=2"
 
 ```
 {"alternative_destinations":
