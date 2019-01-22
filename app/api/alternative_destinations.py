@@ -23,8 +23,8 @@ MONTH_NAMES = {
     12: 'December'}
 
 
-# get three default destinations different from original destination of query
 def default_destinations(iata_code_original_destination):
+    """Get three default destinations different from original destination of query."""
     # Paris, London, Rome, New York
     defaults = ['CDG', 'LHR', 'FCO', 'JFK'] 
     if iata_code_original_destination in defaults:
@@ -38,6 +38,7 @@ def default_destinations(iata_code_original_destination):
 @auth.login_required
 @cross_origin()
 def get_alternative_destinations():
+    """Validates query parameters and assembles output."""
 
     # print(request.args)
     # ImmutableMultiDict([('iata_code', 'LHR'), 
@@ -74,6 +75,7 @@ def get_alternative_destinations():
     dests.append(Destination.query.filter_by(iata_code=defaults[1]).first())
     dests.append(Destination.query.filter_by(iata_code=defaults[2]).first())
 
+    # query in "strict mode"
     query_weather_strict =  Weather.query.filter(
         Weather.month == MONTH_NAMES[date.month],
         Weather.iata_code != iata_code,
@@ -87,6 +89,7 @@ def get_alternative_destinations():
     # print('Strict search found ' + str(len(result_strict)) + ' destinations.')
     # print(result_strict)
 
+    # query in "fuzzy mode" with tolerances
     query_weather_fuzzy =  Weather.query.filter(
         Weather.month == MONTH_NAMES[date.month],
         Weather.iata_code != iata_code,

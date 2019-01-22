@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from config import config
 
+
 bootstrap = Bootstrap()
 db = SQLAlchemy()
 cors = CORS()

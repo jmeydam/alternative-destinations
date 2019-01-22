@@ -3,6 +3,7 @@ from flask_httpauth import HTTPBasicAuth
 from . import api
 from .errors import unauthorized
 
+
 auth = HTTPBasicAuth()
 
 @auth.verify_password
