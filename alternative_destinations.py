@@ -1,6 +1,6 @@
 import os
 from app import create_app, db
-from app.models import Airport, Destination
+from app.models import Airport, Destination, Weather
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 #print(dir(app))
@@ -8,7 +8,7 @@ app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 
 @app.shell_context_processor
 def make_shell_context():
-    return dict(db=db, Airport=Airport, Destination=Destination)
+    return dict(db=db, Airport=Airport, Destination=Destination, Weather=Weather)
 
 @app.cli.command()
 def test():
