@@ -16,6 +16,8 @@ This GitHub repository does not contain data as obtained from World Weather Onli
 
 Weather data for airports can also be obtained from the [Iowa Environmental Mesonet website](https://mesonet.agron.iastate.edu/request/download.phtml?network=IN__ASOS).
 
+Source favicon.ico: [Wikimedia](https://commons.wikimedia.org/wiki/File:Airplane_takeoff_on_blue_sky.jpg)
+
 Further information: data/README.txt
 
 ## Create Virtual Environment
